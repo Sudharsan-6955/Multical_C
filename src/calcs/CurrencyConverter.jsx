@@ -9,12 +9,24 @@ const CurrencyConverter = () => {
 
   // Mock exchange rates (in real app, fetch from API)
   const exchangeRates = {
-    USD: { EUR: 0.85, GBP: 0.73, JPY: 110, CAD: 1.25, AUD: 1.35 },
-    EUR: { USD: 1.18, GBP: 0.86, JPY: 129, CAD: 1.47, AUD: 1.59 },
-    GBP: { USD: 1.37, EUR: 1.16, JPY: 150, CAD: 1.71, AUD: 1.85 }
+    USD: { EUR: 0.85, GBP: 0.73, JPY: 110, CAD: 1.25, AUD: 1.35, INR: 83.12 },
+    EUR: { USD: 1.18, GBP: 0.86, JPY: 129, CAD: 1.47, AUD: 1.59, INR: 97.88 },
+    GBP: { USD: 1.37, EUR: 1.16, JPY: 150, CAD: 1.71, AUD: 1.85, INR: 113.87 },
+    JPY: { USD: 0.0091, EUR: 0.0077, GBP: 0.0067, CAD: 0.011, AUD: 0.012, INR: 0.76 },
+    CAD: { USD: 0.80, EUR: 0.68, GBP: 0.58, JPY: 88, AUD: 1.08, INR: 66.50 },
+    AUD: { USD: 0.74, EUR: 0.63, GBP: 0.54, JPY: 81, CAD: 0.93, INR: 61.54 },
+    INR: { USD: 0.012, EUR: 0.010, GBP: 0.0088, JPY: 1.32, CAD: 0.015, AUD: 0.016 }
   };
 
-  const currencies = ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD'];
+  const currencyData = [
+    { code: 'USD', country: 'United States' },
+    { code: 'EUR', country: 'European Union' },
+    { code: 'GBP', country: 'United Kingdom' },
+    { code: 'JPY', country: 'Japan' },
+    { code: 'CAD', country: 'Canada' },
+    { code: 'AUD', country: 'Australia' },
+    { code: 'INR', country: 'India' }
+  ];
 
   const convertCurrency = () => {
     const amountNum = parseFloat(amount);
@@ -54,8 +66,10 @@ const CurrencyConverter = () => {
                   onChange={(e) => setFromCurrency(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
                 >
-                  {currencies.map(currency => (
-                    <option key={currency} value={currency}>{currency}</option>
+                  {currencyData.map(currency => (
+                    <option key={currency.code} value={currency.code}>
+                      {currency.code} - {currency.country}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -67,8 +81,10 @@ const CurrencyConverter = () => {
                   onChange={(e) => setToCurrency(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
                 >
-                  {currencies.map(currency => (
-                    <option key={currency} value={currency}>{currency}</option>
+                  {currencyData.map(currency => (
+                    <option key={currency.code} value={currency.code}>
+                      {currency.code} - {currency.country}
+                    </option>
                   ))}
                 </select>
               </div>
