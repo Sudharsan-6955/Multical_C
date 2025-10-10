@@ -40,10 +40,10 @@ const CalculatorList = () => {
     },
     {
       id: 6,
-      title: 'Tip Calculator',
-      description: 'Calculate tips and split bills',
-      icon: '💰',
-      path: '/tip-calculator'
+      title: 'CGPA Calculator',
+      description: 'Calculate Cumulative Grade Point Average',
+      icon: '🎓',
+      path: '/cgpa-calculator'
     },
     {
       id: 7,
