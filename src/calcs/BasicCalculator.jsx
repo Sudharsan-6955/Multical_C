@@ -3,58 +3,70 @@ import { Link } from 'react-router-dom';
 
 const BasicCalculator = () => {
   const [display, setDisplay] = useState('0');
-  const [previousValue, setPreviousValue] = useState(null);
-  const [operation, setOperation] = useState(null);
-  const [waitingForOperand, setWaitingForOperand] = useState(false);
+  const [expression, setExpression] = useState('');
+  const [isNewCalculation, setIsNewCalculation] = useState(true);
 
   const inputNumber = (num) => {
-    if (waitingForOperand) {
+    if (isNewCalculation) {
       setDisplay(String(num));
-      setWaitingForOperand(false);
+      setExpression(String(num));
+      setIsNewCalculation(false);
     } else {
-      setDisplay(display === '0' ? String(num) : display + num);
+      const newDisplay = display === '0' ? String(num) : display + num;
+      setDisplay(newDisplay);
+      setExpression(expression + num);
     }
   };
 
-  const inputOperation = (nextOperation) => {
-    const inputValue = parseFloat(display);
-
-    if (previousValue === null) {
-      setPreviousValue(inputValue);
-    } else if (operation) {
-      const currentValue = previousValue || 0;
-      const newValue = calculate(currentValue, inputValue, operation);
-
-      setDisplay(String(newValue));
-      setPreviousValue(newValue);
+  const inputOperation = (operation) => {
+    if (operation === '=') {
+      try {
+        const result = eval(expression.replace(/×/g, '*').replace(/÷/g, '/'));
+        setDisplay(String(result));
+        setExpression(String(result));
+        setIsNewCalculation(true);
+      } catch (error) {
+        setDisplay('Error');
+        setExpression('');
+        setIsNewCalculation(true);
+      }
+    } else {
+      const operatorSymbol = operation === '*' ? '×' : operation === '/' ? '÷' : operation;
+      
+      if (!isNewCalculation) {
+        const newExpression = expression + operatorSymbol;
+        setExpression(newExpression);
+        setDisplay(newExpression);
+      } else {
+        // If starting new calculation after equals, use current display
+        const newExpression = display + operatorSymbol;
+        setExpression(newExpression);
+        setDisplay(newExpression);
+        setIsNewCalculation(false);
+      }
     }
-
-    setWaitingForOperand(true);
-    setOperation(nextOperation);
   };
 
-  const calculate = (firstValue, secondValue, operation) => {
-    switch (operation) {
-      case '+':
-        return firstValue + secondValue;
-      case '-':
-        return firstValue - secondValue;
-      case '*':
-        return firstValue * secondValue;
-      case '/':
-        return firstValue / secondValue;
-      case '=':
-        return secondValue;
-      default:
-        return secondValue;
+  const inputDecimal = () => {
+    if (isNewCalculation) {
+      setDisplay('0.');
+      setExpression('0.');
+      setIsNewCalculation(false);
+    } else {
+      // Check if current number already has a decimal
+      const lastNumberMatch = expression.match(/[0-9]*\.?[0-9]*$/);
+      if (lastNumberMatch && !lastNumberMatch[0].includes('.')) {
+        const newExpression = expression + '.';
+        setExpression(newExpression);
+        setDisplay(newExpression);
+      }
     }
   };
 
   const clear = () => {
     setDisplay('0');
-    setPreviousValue(null);
-    setOperation(null);
-    setWaitingForOperand(false);
+    setExpression('');
+    setIsNewCalculation(true);
   };
 
   return (
@@ -93,7 +105,7 @@ const BasicCalculator = () => {
             <button onClick={() => inputOperation('=')} className="row-span-2 bg-blue-500 text-white p-3 sm:p-4 rounded hover:bg-blue-600 active:bg-blue-700 transition-colors text-sm sm:text-base font-semibold touch-manipulation">=</button>
 
             <button onClick={() => inputNumber(0)} className="col-span-2 bg-gray-200 p-3 sm:p-4 rounded hover:bg-gray-300 active:bg-gray-400 transition-colors text-sm sm:text-base font-semibold touch-manipulation">0</button>
-            <button onClick={() => setDisplay(display + '.')} className="bg-gray-200 p-3 sm:p-4 rounded hover:bg-gray-300 active:bg-gray-400 transition-colors text-sm sm:text-base font-semibold touch-manipulation">.</button>
+            <button onClick={inputDecimal} className="bg-gray-200 p-3 sm:p-4 rounded hover:bg-gray-300 active:bg-gray-400 transition-colors text-sm sm:text-base font-semibold touch-manipulation">.</button>
           </div>
         </div>
 
