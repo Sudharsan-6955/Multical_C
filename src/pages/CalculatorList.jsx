@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const CalculatorList = () => {
+  const [backendStatus, setBackendStatus] = useState('checking');
+
+  useEffect(() => {
+    // Check backend health
+    const checkBackend = async () => {
+      try {
+        const response = await fetch('https://multical-c-backend.onrender.com/api/health');
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Backend Status:', data);
+          setBackendStatus('online');
+        } else {
+          setBackendStatus('offline');
+        }
+      } catch (error) {
+        console.error('Backend Error:', error);
+        setBackendStatus('offline');
+      }
+    };
+
+    checkBackend();
+  }, []);
+
   const calculators = [
     {
       id: 1,
@@ -66,11 +89,27 @@ const CalculatorList = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-6 sm:mb-8 px-4">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">Calculators</h1>
-          <Link to="/" className="text-white hover:text-blue-200 text-base sm:text-lg py-2 px-4 rounded transition-colors flex items-center gap-2">
-            <span className="text-xl sm:hidden">←</span>
-            <span className="hidden sm:inline underline">Back to Home</span>
-            <span className="sm:hidden text-sm">Home</span>
-          </Link>
+          <div className="flex items-center gap-4">
+            {/* Backend Status Indicator */}
+            <div className="hidden sm:flex items-center gap-2 text-white text-sm">
+              <div className={`w-2 h-2 rounded-full ${
+                backendStatus === 'online' ? 'bg-green-400' : 
+                backendStatus === 'offline' ? 'bg-red-400' : 
+                'bg-yellow-400 animate-pulse'
+              }`}></div>
+              <span className="text-xs">
+                {backendStatus === 'online' ? 'Backend Online' : 
+                 backendStatus === 'offline' ? 'Backend Offline' : 
+                 'Checking...'}
+              </span>
+            </div>
+            
+            <Link to="/" className="text-white hover:text-blue-200 text-base sm:text-lg py-2 px-4 rounded transition-colors flex items-center gap-2">
+              <span className="text-xl sm:hidden">←</span>
+              <span className="hidden sm:inline underline">Back to Home</span>
+              <span className="sm:hidden text-sm">Home</span>
+            </Link>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8 px-2 sm:px-0">
