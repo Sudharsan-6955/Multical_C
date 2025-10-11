@@ -64,7 +64,14 @@ const CalculatorList = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-6 sm:mb-8 px-4">Calculators</h1>
+        <div className="flex justify-between items-center mb-6 sm:mb-8 px-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">Calculators</h1>
+          <Link to="/" className="text-white hover:text-blue-200 text-base sm:text-lg py-2 px-4 rounded transition-colors flex items-center gap-2">
+            <span className="text-xl sm:hidden">←</span>
+            <span className="hidden sm:inline underline">Back to Home</span>
+            <span className="sm:hidden text-sm">Home</span>
+          </Link>
+        </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8 px-2 sm:px-0">
           {calculators.map((calc) => (
@@ -80,12 +87,6 @@ const CalculatorList = () => {
               </div>
             </Link>
           ))}
-        </div>
-
-        <div className="text-center px-4">
-          <Link to="/" className="text-white underline hover:text-blue-200 text-base sm:text-lg inline-block py-2 px-4 rounded transition-colors">
-            Back to Home
-          </Link>
         </div>
       </div>
     </div>

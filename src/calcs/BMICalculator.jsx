@@ -57,11 +57,21 @@ const BMICalculator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-500 to-pink-500 p-8">
-      <div className="max-w-md mx-auto">
-        <h1 className="text-3xl font-bold text-white text-center mb-8">⚖️ BMI Calculator</h1>
+    <div className="min-h-screen bg-gradient-to-r from-purple-500 to-pink-500 p-4 sm:p-6 lg:p-8">
+      <div className="max-w-sm sm:max-w-md mx-auto">
+        <div className="flex items-center mb-6 sm:mb-8">
+          <Link 
+            to="/calculators" 
+            className="text-white hover:text-blue-200 transition-colors p-2 rounded-full hover:bg-white/10"
+          >
+            <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </Link>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white ml-4 flex-1">⚖️ BMI Calculator</h1>
+        </div>
         
-        <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 mx-2 sm:mx-0">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">Unit System</label>
             <select
@@ -125,12 +135,6 @@ const BMICalculator = () => {
               </div>
             </div>
           )}
-        </div>
-
-        <div className="text-center mt-6">
-          <Link to="/calculators" className="text-white underline hover:text-blue-200">
-            Back to Calculators
-          </Link>
         </div>
       </div>
     </div>

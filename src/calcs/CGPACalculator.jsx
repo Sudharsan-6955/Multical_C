@@ -80,7 +80,17 @@ const CGPACalculator = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-indigo-500 to-purple-500 p-4 sm:p-6 lg:p-8">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6 sm:mb-8 px-4">🎓 CGPA Calculator</h1>
+        <div className="flex items-center mb-6 sm:mb-8">
+          <Link 
+            to="/calculators" 
+            className="text-white hover:text-blue-200 transition-colors p-2 rounded-full hover:bg-white/10"
+          >
+            <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </Link>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white ml-4 flex-1">🎓 CGPA Calculator</h1>
+        </div>
         
         <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 mx-2 sm:mx-0">
           <div className="mb-6">

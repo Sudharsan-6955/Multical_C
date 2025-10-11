@@ -72,7 +72,17 @@ const BasicCalculator = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 p-4 sm:p-6 lg:p-8">
       <div className="max-w-sm sm:max-w-md mx-auto">
-        <h1 className="text-2xl sm:text-3xl font-bold text-white text-center mb-6 sm:mb-8 px-4">🧮 Basic Calculator</h1>
+        <div className="flex items-center mb-6 sm:mb-8">
+          <Link 
+            to="/calculators" 
+            className="text-white hover:text-blue-200 transition-colors p-2 rounded-full hover:bg-white/10"
+          >
+            <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </Link>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white ml-4 flex-1">🧮 Basic Calculator</h1>
+        </div>
         
         <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 mx-2 sm:mx-0">
           <div className="bg-gray-100 p-3 sm:p-4 rounded mb-4">
@@ -107,12 +117,6 @@ const BasicCalculator = () => {
             <button onClick={() => inputNumber(0)} className="col-span-2 bg-gray-200 p-3 sm:p-4 rounded hover:bg-gray-300 active:bg-gray-400 transition-colors text-sm sm:text-base font-semibold touch-manipulation">0</button>
             <button onClick={inputDecimal} className="bg-gray-200 p-3 sm:p-4 rounded hover:bg-gray-300 active:bg-gray-400 transition-colors text-sm sm:text-base font-semibold touch-manipulation">.</button>
           </div>
-        </div>
-
-        <div className="text-center mt-4 sm:mt-6 px-4">
-          <Link to="/calculators" className="text-white underline hover:text-blue-200 inline-block py-2 px-4 rounded transition-colors text-sm sm:text-base">
-            Back to Calculators
-          </Link>
         </div>
       </div>
     </div>
