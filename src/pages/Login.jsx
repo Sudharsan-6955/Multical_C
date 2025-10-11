@@ -9,7 +9,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://multical-c-backend.onrender.com';
       const response = await fetch(`${backendUrl}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -18,13 +18,14 @@ const Login = () => {
       const data = await response.json();
       if (data.success) {
         setMessage('Login successful! Redirecting...');
+        localStorage.setItem('token', data.token);
         setTimeout(() => navigate('/calculators'), 2000);
       } else {
         setMessage(data.message || 'Invalid credentials');
       }
     } catch (error) {
       console.error('Error during login:', error);
-      setMessage('An error occurred. Please try again.');
+      setMessage('Connection error. Please check your internet and try again.');
     }
   };
 

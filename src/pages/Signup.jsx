@@ -24,7 +24,7 @@ const Signup = () => {
       }
     } catch (error) {
       console.error('Error during signup:', error);
-      setMessage('An error occurred. Please try again.');
+      setMessage('Connection error. Please check your internet and try again.');
     }
   };
 

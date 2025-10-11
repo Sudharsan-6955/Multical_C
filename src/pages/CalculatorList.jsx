@@ -8,13 +8,15 @@ const CalculatorList = () => {
     // Check backend health
     const checkBackend = async () => {
       try {
-        const response = await fetch('https://multical-c-backend.onrender.com/api/health');
+        const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://multical-c-backend.onrender.com';
+        const response = await fetch(`${backendUrl}/`);
         if (response.ok) {
           setBackendStatus('online');
         } else {
           setBackendStatus('offline');
         }
       } catch (error) {
+        console.error('Backend check failed:', error);
         setBackendStatus('offline');
       }
     };
