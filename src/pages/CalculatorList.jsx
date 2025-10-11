@@ -10,14 +10,11 @@ const CalculatorList = () => {
       try {
         const response = await fetch('https://multical-c-backend.onrender.com/api/health');
         if (response.ok) {
-          const data = await response.json();
-          console.log('Backend Status:', data);
           setBackendStatus('online');
         } else {
           setBackendStatus('offline');
         }
       } catch (error) {
-        console.error('Backend Error:', error);
         setBackendStatus('offline');
       }
     };
