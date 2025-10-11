@@ -9,7 +9,9 @@ const Home = () => {
       </header>
       <main className="mt-20">
         <h2 className="text-4xl font-bold">Welcome to Multi Calc</h2>
-        <p className="mt-4 text-lg">Your one-stop solution for all calculator needs.</p>
+        <p className="mt-4 text-lg">Your one-step solution for all calculator needs.</p>
+        <p className="mt-4 text-lg">Register me</p>
+
         <div className="justify-center flex space-x-4 mt-8">
           <Link to="/login" className="px-4 py-2 bg-white text-blue-500 rounded-lg hover:bg-blue-600 hover:text-white transition-colors">
             Login
