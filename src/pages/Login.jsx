@@ -13,13 +13,17 @@ const Login = () => {
       const response = await fetch(`${backendUrl}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
       if (data.success) {
-        setMessage('Login successful! Redirecting...');
         localStorage.setItem('token', data.token);
-        setTimeout(() => navigate('/calculators'), 2000);
+        // mark that a user has registered/logged in on this device
+        localStorage.setItem('userRegistered', 'true');
+        setMessage('Login successful! Redirecting...');
+        // Immediate redirect
+        navigate('/calculators');
       } else {
         setMessage(data.message || 'Invalid credentials');
       }
@@ -49,9 +53,12 @@ const Login = () => {
             className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
+            type="button"
             onClick={handleLogin}
-            className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >Login</button> 
+            className="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white shadow-lg transform transition duration-200 hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-pink-200"
+          >
+            Login
+          </button>
         </form>
         {message && (
           <p className="mt-4 text-center text-sm text-gray-700">{message}</p>

@@ -13,12 +13,15 @@ const Signup = () => {
       const response = await fetch(`${backendUrl}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
       if (data.success) {
-        setMessage('Signup successful! You can now log in.');
-        setTimeout(() => navigate('/login'), 2000); // Redirect to Login page after 2 seconds
+        setMessage('Signup successful! Redirecting to login...');
+        // mark that a user has registered on this device
+        localStorage.setItem('userRegistered', 'true');
+        navigate('/login');
       } else {
         setMessage(data.message || 'Signup failed');
       }
@@ -49,7 +52,7 @@ const Signup = () => {
           />
           <button
             onClick={handleSignup}
-            className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-green-400 via-teal-500 to-blue-500 text-white shadow-lg transform transition duration-200 hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-teal-200"
           >
             Sign Up
           </button>
