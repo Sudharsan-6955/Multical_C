@@ -65,7 +65,7 @@ A comprehensive React-based calculator application suite with user authenticatio
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- npm or yarn package manager
+- npm
 
 ### Installation Steps
 
@@ -149,12 +149,9 @@ src/
 ```bash
 # Development
 npm run dev              # Start development server with hot reload
-npm run dev:host         # Start dev server accessible on network
 
 # Build & Production
 npm run build            # Build optimized production bundle
-npm run preview          # Preview production build locally
-npm run build:analyze    # Analyze bundle size
 
 # Code Quality
 npm run lint             # Run ESLint for code quality
@@ -162,10 +159,6 @@ npm run lint:fix         # Auto-fix ESLint issues
 npm run format           # Format code with Prettier
 npm run type-check       # TypeScript type checking
 
-# Testing
-npm run test             # Run unit tests
-npm run test:coverage    # Run tests with coverage report
-npm run test:watch       # Run tests in watch mode
 ```
 
 ## 🌍 Environment Variables
@@ -190,29 +183,7 @@ npm run build
 npx vercel --prod
 ```
 
-### Netlify
-1. Connect repository to Netlify
-2. Configure build settings:
-   - **Build command**: `npm run build`
-   - **Publish directory**: `dist`
-3. Set environment variables in Netlify dashboard
 
-### Docker
-```dockerfile
-# Build stage
-FROM node:18-alpine as build
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
-# Production stage
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
 
 ## 🔧 Tech Stack
 
@@ -229,7 +200,6 @@ CMD ["nginx", "-g", "daemon off;"]
 ### Development Tools
 - **ESLint** - JavaScript/React linting
 - **Prettier** - Code formatting
-- **Husky** - Git hooks for quality control
 
 ## 📱 Browser Support
 
@@ -244,37 +214,14 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ## 🎯 Responsive Breakpoints
 
-```css
-/* Mobile First Approach */
-sm: 640px    /* Tablet portrait */
-md: 768px    /* Tablet landscape */
-lg: 1024px   /* Desktop */
-xl: 1280px   /* Large desktop */
-2xl: 1536px  /* Extra large desktop */
-```
 
-## 🧪 Testing Strategy
 
-- **Unit Tests**: Individual component testing
-- **Integration Tests**: Calculator logic validation
-- **E2E Tests**: Complete user workflows
-- **Accessibility Tests**: WCAG compliance
 
 ## 🔒 Security Features
 
 - Input validation and sanitization
-- XSS protection
-- CSRF protection
 - Secure authentication flow
 - Environment variable protection
-
-## 📈 Performance Optimizations
-
-- Code splitting with React.lazy()
-- Tree shaking for smaller bundles
-- Image optimization
-- CSS purging with Tailwind
-- Service worker for caching
 
 ## 🤝 Contributing
 
@@ -291,10 +238,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 Support
 
 For support and questions:
-- 📧 Email: support@multicalc.app
-- 📚 Documentation: [docs.multicalc.app](https://docs.multicalc.app)
-- 🐛 Issues: [GitHub Issues](https://github.com/your-repo/issues)
-
+- 📧 Email:sudharsan638294@gmail.com
 ---
 
 **Built with ❤️ for students, professionals, and anyone who needs reliable calculations on the go!**
