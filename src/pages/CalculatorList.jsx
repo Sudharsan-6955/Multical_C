@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CalculatorList = () => {
   const [backendStatus, setBackendStatus] = useState('checking');
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
 
   useEffect(() => {
     // Check backend health
@@ -80,17 +86,24 @@ const CalculatorList = () => {
       description: 'Convert between different units',
       icon: '📏',
       path: '/unit-converter'
+    },
+    {
+      id: 9,
+      title: 'Tip Calculator',
+      description: 'Calculate tips and split bills effortlessly',
+      icon: '💰',
+      path: '/tip-calculator'
     }
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-6 sm:mb-8 px-4">
+        <div className="flex justify-between items-center mb-6 sm:mb-8 px-4 flex-wrap gap-4">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">Calculators</h1>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
             {/* Backend Status Indicator */}
-            <div className="hidden sm:flex items-center gap-2 text-white text-sm">
+            <div className="hidden sm:flex items-center gap-2 text-white text-sm bg-black/20 px-3 py-1 rounded-full">
               <div className={`w-2 h-2 rounded-full ${
                 backendStatus === 'online' ? 'bg-green-400' : 
                 backendStatus === 'offline' ? 'bg-red-400' : 
@@ -103,11 +116,17 @@ const CalculatorList = () => {
               </span>
             </div>
             
-            <Link to="/" className="text-white hover:text-blue-200 text-base sm:text-lg py-2 px-4 rounded transition-colors flex items-center gap-2">
-              <span className="text-xl sm:hidden">←</span>
-              <span className="hidden sm:inline underline">Back to Home</span>
-              <span className="sm:hidden text-sm">Home</span>
+            <Link to="/" className="text-white hover:text-blue-200 text-sm sm:text-base py-1.5 px-3 rounded transition-colors flex items-center gap-1.5 bg-white/10 hover:bg-white/20">
+              <span>←</span>
+              <span>Home</span>
             </Link>
+
+            <button
+              onClick={handleLogout}
+              className="text-white hover:text-red-200 text-sm sm:text-base py-1.5 px-3 rounded transition-colors bg-red-500/80 hover:bg-red-600 font-medium"
+            >
+              Logout
+            </button>
           </div>
         </div>
         

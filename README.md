@@ -1,11 +1,11 @@
 # MultiCalc - Advanced Calculator Suite
 
-A comprehensive React-based calculator application suite with user authentication, responsive design, and 8 specialized calculators for different real-world scenarios.
+A comprehensive React-based calculator application suite with user authentication, responsive design, and 9 specialized calculators for different real-world scenarios.
 
 ## 🚀 Features
 
 - 🔐 **User Authentication** - Secure login/signup system
-- 🧮 **8 Specialized Calculators** - Covering various real-world use cases
+- 🧮 **9 Specialized Calculators** - Covering various real-world use cases
 - 📱 **Fully Responsive** - Mobile, tablet, and desktop optimized
 - 🎨 **Modern UI/UX** - Beautiful gradients and animations
 - ⚡ **Fast Performance** - Built with Vite for lightning-fast development
@@ -60,6 +60,16 @@ A comprehensive React-based calculator application suite with user authenticatio
 - Multiple unit categories
 - Precise conversion factors
 - **Use Cases**: Cooking, construction, international measurements
+
+### 9. **Tip Calculator** 💰
+- Real-time tip and bill calculation
+- Split-bill computation per person
+- Quick-select percentage presets (10%, 15%, 18%, 20%)
+- **Use Cases**: Dining out, group expenses, hospitality tipping
+
+## 🌐 Live Application
+- **Live Demo**: [https://multical-c.vercel.app](https://multical-c.vercel.app)
+- **Backend API**: [https://multical-c-backend.onrender.com](https://multical-c-backend.onrender.com)
 
 ## 🛠️ Setup & Installation
 

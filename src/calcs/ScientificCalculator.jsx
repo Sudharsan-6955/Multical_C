@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const ScientificCalculator = () => {
   const [display, setDisplay] = useState('0');
-  const [memory, setMemory] = useState(0);
 
   const inputNumber = (num) => {
     setDisplay(display === '0' ? String(num) : display + num);
@@ -11,9 +10,16 @@ const ScientificCalculator = () => {
 
   const calculate = (expression) => {
     try {
-      const result = eval(expression.replace(/×/g, '*').replace(/÷/g, '/'));
+      const sanitized = expression.replace(/×/g, '*').replace(/÷/g, '/');
+      if (!/^[\d+\-*/. ()**eE]+$/.test(sanitized)) {
+        throw new Error('Invalid expression');
+      }
+      const result = Function(`'use strict'; return (${sanitized})`)();
+      if (!isFinite(result)) {
+        throw new Error('Math error');
+      }
       setDisplay(String(result));
-    } catch (error) {
+    } catch {
       setDisplay('Error');
     }
   };

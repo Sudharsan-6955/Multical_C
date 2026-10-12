@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 const BMICalculator = () => {
@@ -8,7 +8,7 @@ const BMICalculator = () => {
   const [bmi, setBMI] = useState(0);
   const [category, setCategory] = useState('');
 
-  const calculateBMI = () => {
+  const calculateBMI = useCallback(() => {
     let weightKg = parseFloat(weight);
     let heightM = parseFloat(height);
 
@@ -33,13 +33,13 @@ const BMICalculator = () => {
         setCategory('Obese');
       }
     }
-  };
+  }, [weight, height, unit]);
 
   useEffect(() => {
     if (weight && height) {
       calculateBMI();
     }
-  }, [weight, height, unit]);
+  }, [weight, height, calculateBMI]);
 
   const getCategoryColor = () => {
     switch (category) {

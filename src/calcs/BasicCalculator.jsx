@@ -21,11 +21,18 @@ const BasicCalculator = () => {
   const inputOperation = (operation) => {
     if (operation === '=') {
       try {
-        const result = eval(expression.replace(/×/g, '*').replace(/÷/g, '/'));
+        const sanitized = expression.replace(/×/g, '*').replace(/÷/g, '/');
+        if (!/^[\d+\-*/. ()]+$/.test(sanitized)) {
+          throw new Error('Invalid expression');
+        }
+        const result = Function(`'use strict'; return (${sanitized})`)();
+        if (!isFinite(result)) {
+          throw new Error('Math error');
+        }
         setDisplay(String(result));
         setExpression(String(result));
         setIsNewCalculation(true);
-      } catch (error) {
+      } catch {
         setDisplay('Error');
         setExpression('');
         setIsNewCalculation(true);

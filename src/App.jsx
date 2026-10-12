@@ -12,40 +12,11 @@ import CurrencyConverter from './calcs/CurrencyConverter';
 import CGPACalculator from './calcs/CGPACalculator';
 import AgeCalculator from './calcs/AgeCalculator';
 import UnitConverter from './calcs/UnitConverter';
+import TipCalculator from './calcs/TipCalculator';
 import ProtectedRoute from './components/ProtectedRoute';
 import './index.css';
 
 function App() {
-  // Prevent inspect element and console manipulation (basic protection)
-  React.useEffect(() => {
-    // Disable right-click
-    const handleContextMenu = (e) => {
-      e.preventDefault();
-    };
-    
-    // Detect DevTools opening
-    const detectDevTools = () => {
-      const threshold = 160;
-      if (window.outerWidth - window.innerWidth > threshold || 
-          window.outerHeight - window.innerHeight > threshold) {
-        // DevTools is open - you could redirect or show warning
-        console.clear();
-      }
-    };
-
-    document.addEventListener('contextmenu', handleContextMenu);
-    window.addEventListener('resize', detectDevTools);
-    
-    // Periodic checks
-    const interval = setInterval(detectDevTools, 1000);
-
-    return () => {
-      document.removeEventListener('contextmenu', handleContextMenu);
-      window.removeEventListener('resize', detectDevTools);
-      clearInterval(interval);
-    };
-  }, []);
-
   return (
     <Router>
       <div className="min-h-screen w-full overflow-x-hidden">
@@ -96,6 +67,11 @@ function App() {
           <Route path="/unit-converter" element={
             <ProtectedRoute>
               <UnitConverter />
+            </ProtectedRoute>
+          } />
+          <Route path="/tip-calculator" element={
+            <ProtectedRoute>
+              <TipCalculator />
             </ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/" replace />} />

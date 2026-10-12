@@ -96,7 +96,7 @@ const CGPACalculator = () => {
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-4">Add Your Subjects</h3>
             
-            {subjects.map((subject, index) => (
+            {subjects.map((subject) => (
               <div key={subject.id} className="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-4 p-3 bg-gray-50 rounded">
                 <input
                   type="text"

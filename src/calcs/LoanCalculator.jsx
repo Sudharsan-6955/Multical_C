@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 const LoanCalculator = () => {
@@ -9,7 +9,7 @@ const LoanCalculator = () => {
   const [totalPayment, setTotalPayment] = useState(0);
   const [totalInterest, setTotalInterest] = useState(0);
 
-  const calculateLoan = () => {
+  const calculateLoan = useCallback(() => {
     const principal = parseFloat(loanAmount);
     const monthlyRate = parseFloat(interestRate) / 100 / 12;
     const numberOfPayments = parseInt(loanTerm) * 12;
@@ -26,13 +26,13 @@ const LoanCalculator = () => {
       setTotalPayment(totalPaymentAmount);
       setTotalInterest(totalInterestAmount);
     }
-  };
+  }, [loanAmount, interestRate, loanTerm]);
 
   useEffect(() => {
     if (loanAmount && interestRate && loanTerm) {
       calculateLoan();
     }
-  }, [loanAmount, interestRate, loanTerm]);
+  }, [loanAmount, interestRate, loanTerm, calculateLoan]);
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-500 to-teal-500 p-4 sm:p-6 lg:p-8">
